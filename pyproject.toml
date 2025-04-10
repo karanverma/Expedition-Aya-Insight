@@ -1,0 +1,12 @@
+[project]
+name = "aya-insight"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "langchain>=0.3.23",
+    "langchain-cohere>=0.4.3",
+    "pandas>=2.2.3",
+    "pytest>=8.3.5",
+]
