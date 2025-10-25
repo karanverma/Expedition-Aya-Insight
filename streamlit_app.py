@@ -4,6 +4,11 @@ import logging
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from queue import Queue, Empty
 import uuid
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 from streaming_generator import clear_upload_directory, setup_retrieval_system, process_uploaded_files
 from app.summarization.summarizer import DocumentSummarizer
 
@@ -570,7 +575,7 @@ if uploaded_files:
                                 placeholder.markdown(final_c_content)  # Update with final content
 
                 elif msg_type == 'file_error':
-                    _, critical_error_msg = msg
+                    _, _, critical_error_msg = msg
                     if filename not in files_done_processing:
                         files_done_processing.add(filename)
                         st.session_state.tasks_running -= 1

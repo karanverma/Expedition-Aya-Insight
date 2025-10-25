@@ -2,6 +2,7 @@
 Vector database operations for document storage and retrieval.
 """
 from typing import List, Dict, Any, Optional
+import os
 
 from langchain_chroma import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -33,7 +34,12 @@ class Retriever:
         Args:
             model: The embedding model name to use for vectorization
         """
-        self.cohere_client = cohere.Client()
+        # Get the API key from environment variable
+        api_key = os.getenv("COHERE_API_KEY")
+        if not api_key:
+            raise ValueError("COHERE_API_KEY environment variable is not set")
+
+        self.cohere_client = cohere.Client(api_key=api_key)
         self.faiss = None
         self.embedding_model = CohereEmbeddings(model=model)
         self.text_splitter = RecursiveCharacterTextSplitter(

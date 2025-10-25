@@ -175,7 +175,7 @@ class DocumentSummarizer:
             yield cohere_client.chat(
                 model=LLM_MODEL,
                 message=f"Find the research paper link for this document: {document_text[:1000]} Respond only with the link.",
-                connectors=[{"id": "web-search"}],
+                # connectors=[{"id": "web-search"}], #deprecated
             ).text
         except Exception as e:
             logger.error(f"Cohere API error in resource link lookup: {e}")
